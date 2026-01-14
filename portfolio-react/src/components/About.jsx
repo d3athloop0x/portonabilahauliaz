@@ -25,7 +25,7 @@ const About = () => {
 
   const stats = [
     { icon: FaCode, value: "Ongoing", label: "Learning Journey" },
-    { icon: FaProjectDiagram, value: "3+", label: "Projects Completed" },
+    { icon: FaProjectDiagram, value: "5+", label: "Projects Completed" },
     { icon: FaAward, value: "15+", label: "Certificates" },
   ];
 
