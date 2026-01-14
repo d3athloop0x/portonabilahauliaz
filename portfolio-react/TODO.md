@@ -1,0 +1,1 @@
+- [x] Update Contact.jsx to make email and phone clickable links
