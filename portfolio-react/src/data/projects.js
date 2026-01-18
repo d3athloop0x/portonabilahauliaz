@@ -54,6 +54,14 @@ export const projects = [
       "Ultrasonic Sensors",
     ],
   },
+  {id: 6,
+    title: "Predict House Price",
+    description: "A machine learning project to predict house prices using regression algorithms and data analysis techniques.",
+    image: "/PRICE.png",
+    liveLink: "https://app-r-exlskxbztuubxyadycnjkt.streamlit.app/",
+    codeLink: "https://github.com/d3athloop0x/streamlit-r/blob/main/handson_project/streamlit-regression/app.py",
+    techStack: ["Streamlit", "Python", "Machine Learning"],
+  }
 ];
 
 export const certificates = {
