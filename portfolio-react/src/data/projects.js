@@ -21,13 +21,12 @@ export const projects = [
   },
   {
     id: 3,
-    title: "Plant 100,000 Mangroves",
+    title: "EZ Store",
     description:
-      "A web project about planting 100,000 mangroves using HTML and CSS.",
-    image: "/plant.png",
-    liveLink: "https://d3athloop0x.github.io/tugas-1-devx/",
-    codeLink: "https://github.com/d3athloop0x/tugas-1-devx",
-    techStack: ["HTML", "CSS"],
+      "An e-commerce website built with WordPress, Elementor, and WooCommerce.",
+    image: "/wp.png",
+    liveLink: "",
+    techStack: ["Wordpress", "Elementor", "WooCommerce"],
   },
   {
     id: 4,
