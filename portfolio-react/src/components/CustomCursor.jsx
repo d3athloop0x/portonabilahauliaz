@@ -7,9 +7,15 @@ const CustomCursor = () => {
   const [isTouchDevice, setIsTouchDevice] = useState(false);
 
   useEffect(() => {
-    // Check if device is a touch device
+    // Check if device is a touch device more aggressively for Android/Samsung
     const checkTouchDevice = () => {
-      setIsTouchDevice(window.matchMedia("(hover: none) and (pointer: coarse)").matches);
+      const isTouch = (
+        'ontouchstart' in window ||
+        navigator.maxTouchPoints > 0 ||
+        window.matchMedia("(pointer: coarse)").matches ||
+        window.matchMedia("(hover: none)").matches
+      );
+      setIsTouchDevice(isTouch);
     };
 
     checkTouchDevice();
