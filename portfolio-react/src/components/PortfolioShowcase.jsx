@@ -71,7 +71,7 @@ const PortfolioShowcase = () => {
       <h3 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
         {project.title}
       </h3>
-      <p className="text-gray-800 dark:text-gray-200 text-xs sm:text-sm mb-3 sm:mb-4 leading-relaxed">
+      <p className="text-gray-600 dark:text-gray-300 text-xs sm:text-sm mb-3 sm:mb-4 leading-relaxed">
         {project.description}
       </p>
 
@@ -137,7 +137,7 @@ const PortfolioShowcase = () => {
       <p className="text-purple-300 text-xs sm:text-sm mb-2">
         {certificate.issuer}
       </p>
-      <p className="text-gray-800 dark:text-gray-100 text-xs">
+      <p className="text-gray-600 dark:text-gray-300 text-xs">
         {certificate.date}
       </p>
     </motion.div>
@@ -176,7 +176,7 @@ const PortfolioShowcase = () => {
       <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
         {skill.name}
       </h3>
-      <p className="text-gray-800 dark:text-gray-200 text-sm">
+      <p className="text-gray-600 dark:text-gray-300 text-sm">
         {skill.description}
       </p>
 
@@ -250,7 +250,7 @@ const PortfolioShowcase = () => {
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center space-x-2 sm:space-x-3">
                     <FaCheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-green-400 flex-shrink-0" />
-                    <span className="text-gray-800 dark:text-gray-200 text-xs sm:text-sm font-medium leading-relaxed">
+                    <span className="text-gray-700 dark:text-gray-200 text-xs sm:text-sm font-medium leading-relaxed">
                       {item}
                     </span>
                   </div>
@@ -317,8 +317,8 @@ const PortfolioShowcase = () => {
                     onClick={() => setProjectFilter(filter)}
                     className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl font-medium transition-all duration-300 text-xs sm:text-base ${
                       projectFilter === filter
-                        ? "bg-gradient-to-r from-purple-500 to-blue-500 text-gray-900 dark:text-gray-100 neon-glow"
-                        : "text-gray-800 dark:text-gray-100 hover:text-gray-900 dark:hover:text-gray-100 hover:neon-glow"
+                        ? "bg-gradient-to-r from-purple-500 to-blue-500 text-white neon-glow"
+                        : "text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
                     }`}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -367,8 +367,8 @@ const PortfolioShowcase = () => {
                     onClick={() => setCertificateFilter(filter)}
                     className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl font-medium transition-all duration-300 text-xs sm:text-base ${
                       certificateFilter === filter
-                        ? "bg-gradient-to-r from-purple-500 to-blue-500 text-gray-900 dark:text-gray-100 neon-glow"
-                        : "text-gray-800 dark:text-gray-100 hover:text-gray-900 dark:hover:text-gray-100 hover:neon-glow"
+                        ? "bg-gradient-to-r from-purple-500 to-blue-500 text-white neon-glow"
+                        : "text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
                     }`}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -466,8 +466,8 @@ const PortfolioShowcase = () => {
                   onClick={() => setActiveTab(tab.id)}
                   className={`relative flex items-center space-x-1 px-2 py-1.5 sm:px-4 sm:py-2 rounded-lg font-medium transition-all duration-300 text-sm whitespace-nowrap ${
                     activeTab === tab.id
-                      ? "text-purple-600 dark:text-purple-300"
-                      : "text-gray-800 dark:text-gray-100 hover:text-gray-900 dark:hover:text-gray-100"
+                      ? "text-purple-600 dark:text-purple-400 font-semibold"
+                      : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200"
                   }`}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}

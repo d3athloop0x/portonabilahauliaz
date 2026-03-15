@@ -1,3 +1,4 @@
+import Tilt from 'react-parallax-tilt';
 import React from "react";
 import { motion } from "framer-motion";
 import {
@@ -138,7 +139,7 @@ const About = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
             About <span className="neon-text">Me</span>
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto rounded-full"></div>
@@ -158,14 +159,14 @@ const About = () => {
                 Frontend Developer & Informatics Engineering Student
               </h3>
 
-              <p className="text-gray-700 dark:text-gray-100 leading-relaxed mb-6">
+              <p className="text-gray-700 dark:text-gray-200 leading-relaxed mb-6">
                 I'm a frontend-focused Informatics Engineering student who
                 builds responsive, user-centered web interfaces with an emphasis
                 on clean UI, usability, and accessibility. I enjoy turning ideas
                 into functional and visually engaging web experiences.
               </p>
 
-              <p className="text-gray-700 dark:text-gray-100 leading-relaxed mb-8">
+              <p className="text-gray-700 dark:text-gray-200 leading-relaxed mb-8">
                 Currently pursuing my degree while continuously improving my
                 skills in React, JavaScript, and UI/UX design. I enjoy learning
                 new technologies, solving problems, and writing clean,
@@ -176,20 +177,27 @@ const About = () => {
             {/* Stats */}
             <div className="grid grid-cols-3 gap-4 justify-center">
               {stats.map((stat, index) => (
-                <motion.div
+                <Tilt
                   key={index}
-                  variants={itemVariants}
-                  className="glass p-4 sm:p-6 rounded-xl text-center hover:neon-glow transition-all duration-300"
-                  whileHover={{ y: -5 }}
+                  tiltMaxAngleX={15}
+                  tiltMaxAngleY={15}
+                  scale={1.05}
+                  transitionSpeed={1000}
                 >
-                  <stat.icon className="w-6 h-6 sm:w-8 sm:h-8 text-purple-400 mx-auto mb-2 sm:mb-3" />
-                  <div className="text-lg sm:text-2xl font-bold text-gray-900 dark:text-gray-100 mb-1">
-                    {stat.value}
-                  </div>
-                  <div className="text-xs sm:text-sm text-gray-700 dark:text-gray-100 leading-tight">
-                    {stat.label}
-                  </div>
-                </motion.div>
+                  <motion.div
+                    variants={itemVariants}
+                    className="glass p-4 sm:p-6 rounded-xl text-center hover:neon-glow transition-all duration-300 h-full"
+                    whileHover={{ y: -5 }}
+                  >
+                    <stat.icon className="w-6 h-6 sm:w-8 sm:h-8 text-purple-400 mx-auto mb-2 sm:mb-3" />
+                    <div className="text-lg sm:text-2xl font-bold text-gray-900 dark:text-white mb-1">
+                      {stat.value}
+                    </div>
+                    <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 leading-tight">
+                      {stat.label}
+                    </div>
+                  </motion.div>
+                </Tilt>
               ))}
             </div>
 

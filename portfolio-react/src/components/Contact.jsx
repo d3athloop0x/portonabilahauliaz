@@ -9,14 +9,18 @@ import {
   FaGithub,
   FaLinkedin,
 } from "react-icons/fa";
+import { supabase } from "../supabaseClient";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     subject: "",
+    subject: "",
     message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null); // 'success' | 'error' | null
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -26,15 +30,42 @@ const Contact = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert("Thank you for your message! I will get back to you soon.");
-    setFormData({
-      name: "",
-      email: "",
-      subject: "",
-      message: "",
-    });
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      const { error } = await supabase
+        .from('messages')
+        .insert([
+          { 
+            name: formData.name, 
+            email: formData.email, 
+            subject: formData.subject, 
+            message: formData.message 
+          }
+        ]);
+
+      if (error) throw error;
+
+      setSubmitStatus('success');
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
+      
+      // Clear success message after 5 seconds
+      setTimeout(() => setSubmitStatus(null), 5000);
+      
+    } catch (error) {
+      console.error("Error sending message:", error.message);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const containerVariants = {
@@ -138,7 +169,7 @@ const Contact = () => {
               <h3 className="text-2xl font-semibold text-purple-300 mb-6">
                 Let's Talk
               </h3>
-              <p className="text-gray-700 dark:text-gray-100 leading-relaxed mb-8">
+              <p className="text-gray-700 dark:text-gray-200 leading-relaxed mb-8">
                 I'm always open to discussing new opportunities, interesting
                 projects, or just having a chat about technology and design.
                 Feel free to reach out!
@@ -162,7 +193,7 @@ const Contact = () => {
                     <h4 className="font-semibold text-gray-900 dark:text-gray-100">
                       {info.title}
                     </h4>
-                    <p className="text-gray-700 dark:text-gray-100">
+                    <p className="text-gray-700 dark:text-gray-200">
                       {info.value}
                     </p>
                   </div>
@@ -205,7 +236,7 @@ const Contact = () => {
                   onChange={handleInputChange}
                   placeholder="Your Name"
                   required
-                  className="w-full px-4 py-3 glass border border-white/10 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900 dark:text-gray-100 placeholder-gray-400 transition-all duration-300"
+                  className="w-full px-4 py-3 glass border border-white/10 dark:border-white/10 border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 transition-all duration-300"
                 />
               </div>
 
@@ -217,7 +248,7 @@ const Contact = () => {
                   onChange={handleInputChange}
                   placeholder="Your Email"
                   required
-                  className="w-full px-4 py-3 glass border border-white/10 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900 dark:text-gray-100 placeholder-gray-400 transition-all duration-300"
+                  className="w-full px-4 py-3 glass border border-white/10 dark:border-white/10 border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 transition-all duration-300"
                 />
               </div>
 
@@ -228,7 +259,7 @@ const Contact = () => {
                   value={formData.subject}
                   onChange={handleInputChange}
                   placeholder="Subject"
-                  className="w-full px-4 py-3 glass border border-white/10 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900 dark:text-gray-100 placeholder-gray-400 transition-all duration-300"
+                  className="w-full px-4 py-3 glass border border-white/10 dark:border-white/10 border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 transition-all duration-300"
                 />
               </div>
 
@@ -240,18 +271,52 @@ const Contact = () => {
                   placeholder="Your Message"
                   required
                   rows="5"
-                  className="w-full px-4 py-3 glass border border-white/10 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900 dark:text-gray-100 placeholder-gray-400 transition-all duration-300 resize-none"
+                  className="w-full px-4 py-3 glass border border-white/10 dark:border-white/10 border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 transition-all duration-300 resize-none"
                 ></textarea>
               </div>
 
               <motion.button
                 type="submit"
-                className="w-full glass px-8 py-4 rounded-xl text-gray-900 dark:text-white font-semibold hover:neon-glow transition-all duration-300"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                disabled={isSubmitting}
+                className={`w-full glass px-8 py-4 rounded-xl text-gray-900 dark:text-white font-semibold transition-all duration-300 flex items-center justify-center space-x-2 ${
+                  isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:neon-glow'
+                }`}
+                whileHover={!isSubmitting ? { scale: 1.02 } : {}}
+                whileTap={!isSubmitting ? { scale: 0.98 } : {}}
               >
-                Send Message
+                {isSubmitting ? (
+                  <>
+                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-purple-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    <span>Sending...</span>
+                  </>
+                ) : (
+                  <span>Send Message</span>
+                )}
               </motion.button>
+              
+              {/* Status Messages */}
+              {submitStatus === 'success' && (
+                <motion.div 
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="p-4 bg-green-500/10 border border-green-500/50 rounded-xl text-green-600 dark:text-green-400 text-center text-sm font-medium"
+                >
+                  Message sent successfully! I'll get back to you soon.
+                </motion.div>
+              )}
+              
+              {submitStatus === 'error' && (
+                <motion.div 
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="p-4 bg-red-500/10 border border-red-500/50 rounded-xl text-red-600 dark:text-red-400 text-center text-sm font-medium"
+                >
+                  Failed to send message. Please try again or use my direct email.
+                </motion.div>
+              )}
             </form>
           </motion.div>
         </motion.div>

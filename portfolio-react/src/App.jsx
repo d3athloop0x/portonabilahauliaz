@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll } from "framer-motion";
 import Header from "./components/Header";
 import Home from "./components/Home";
 import About from "./components/About";
@@ -7,6 +7,8 @@ import Experience from "./components/Experience";
 import PortfolioShowcase from "./components/PortfolioShowcase";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import CustomCursor from "./components/CustomCursor";
+import TechSlider from "./components/TechSlider";
 
 function App() {
   const [activeSection, setActiveSection] = useState("home");
@@ -75,8 +77,18 @@ function App() {
     }
   };
 
+  const { scrollYProgress } = useScroll();
+
   return (
     <div className="relative min-h-screen">
+      <CustomCursor />
+      
+      {/* Scroll Progress Bar */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 to-blue-500 origin-left z-[10000]"
+        style={{ scaleX: scrollYProgress }}
+      />
+      
       <div className="relative z-10">
         <Header
           activeSection={activeSection}
@@ -85,6 +97,7 @@ function App() {
           toggleDarkMode={toggleDarkMode}
         />
         <Home />
+        <TechSlider />
         <About />
         <Experience />
         <PortfolioShowcase />

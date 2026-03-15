@@ -1,3 +1,4 @@
+import Tilt from 'react-parallax-tilt';
 import React from "react";
 import { motion } from "framer-motion";
 import { FaBriefcase, FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa";
@@ -26,6 +27,33 @@ const Experience = () => {
   const experiences = [
     {
       id: 1,
+      title: "WebDev I-SECRET",
+      position: "Ketua Divisi WebDev | Januari 2026 – Sekarang",
+      period: "",
+      description: [
+        "Bertanggung jawab atas pengembangan dan pemeliharaan website resmi I-SECRET.",
+        "Memimpin tim WebDev dalam merancang, mengimplementasikan, dan mengelola fitur-fitur baru.",
+        "Melakukan koordinasi dengan divisi lain untuk memastikan integrasi sistem yang lancar.",
+        "Mengawasi pembaruan konten dan memastikan keamanan serta performa website.",
+      ],
+      image: "/isec.jpeg", // Placeholder for photo
+      location: "UNNES",
+    },
+    {
+      id: 2,
+      title: "Asisten Laboratorium Ilmu Komputer UNNES",
+      position: "Asisten Laboratorium | Januari 2026 – Sekarang",
+      period: "",
+      description: [
+        "Membantu dosen dalam kegiatan laboratorium dan asistensi mata kuliah di Ilmu Komputer UNNES.",
+        "Memberikan bimbingan dan arahan kepada mahasiswa dalam memahami materi praktikum mata kuliah.",
+        "Melakukan pemeliharaan dan pengelolaan perangkat keras serta lunak di laboratorium.",
+      ],
+      image: "/aslabb.jpeg", // Placeholder for photo
+      location: "UNNES",
+    },
+    {
+      id: 3,
       title: "Internship – Codelines UNNES",
       position: "Divisi IT Development | Oktober – Desember 2025",
       period: "",
@@ -38,7 +66,7 @@ const Experience = () => {
       location: "UNNES",
     },
     {
-      id: 2,
+      id: 4,
       title: "HIMA Ilmu Komputer UNNES",
       position: "Staff Ahli Divisi Sosial Masyarakat | Januari – Desember 2025",
       period: "",
@@ -53,7 +81,7 @@ const Experience = () => {
       location: "UNNES",
     },
     {
-      id: 3,
+      id: 5,
       title: "Magang HIMA ILKOM UNNES",
       position: "Divisi Sosial Masyarakat | Oktober – Desember 2024",
       period: "",
@@ -86,7 +114,7 @@ const Experience = () => {
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
             My <span className="neon-text">Experience</span>
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto rounded-full"></div>
@@ -108,8 +136,11 @@ const Experience = () => {
               }`}
             >
               {/* Image */}
-              <motion.div
-                whileHover={{ scale: 1.05 }}
+              <Tilt
+                tiltMaxAngleX={10}
+                tiltMaxAngleY={10}
+                scale={1.05}
+                transitionSpeed={1000}
                 className="flex-shrink-0"
               >
                 <div className="glass p-6 rounded-2xl">
@@ -122,50 +153,59 @@ const Experience = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-xl"></div>
                   </div>
                 </div>
-              </motion.div>
+              </Tilt>
 
               {/* Content */}
-              <motion.div
-                className="flex-1 glass p-8 rounded-2xl hover:neon-glow transition-all duration-300"
-                whileHover={{ y: -5 }}
+              <Tilt
+                tiltMaxAngleX={5}
+                tiltMaxAngleY={5}
+                scale={1.02}
+                transitionSpeed={1000}
+                className="flex-1"
+                gyroscope={true}
               >
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <h3 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
-                      {exp.title}
-                    </h3>
-                    {exp.position && (
-                      <p className="text-lg text-purple-600 dark:text-purple-300 mb-2">
-                        {exp.position}
-                      </p>
-                    )}
-                  </div>
-                  <div className="flex items-center space-x-4 text-sm text-gray-700 dark:text-gray-100">
-                    <div className="flex items-center space-x-1">
-                      <FaMapMarkerAlt className="w-4 h-4" />
-                      <span>{exp.location}</span>
+                <motion.div
+                  className="h-full glass p-8 rounded-2xl hover:neon-glow transition-all duration-300"
+                  whileHover={{ y: -5 }}
+                >
+                  <div className="flex items-start justify-between mb-4">
+                    <div>
+                      <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                        {exp.title}
+                      </h3>
+                      {exp.position && (
+                        <p className="text-lg text-purple-600 dark:text-purple-300 mb-2">
+                          {exp.position}
+                        </p>
+                      )}
+                    </div>
+                    <div className="flex items-center space-x-4 text-sm text-gray-700 dark:text-gray-200">
+                      <div className="flex items-center space-x-1">
+                        <FaMapMarkerAlt className="w-4 h-4" />
+                        <span>{exp.location}</span>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <ul className="space-y-3">
-                  {exp.description.map((item, idx) => (
-                    <motion.li
-                      key={idx}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ delay: idx * 0.1 }}
-                      viewport={{ once: true }}
-                      className="flex items-start space-x-3"
-                    >
-                      <FaBriefcase className="w-5 h-5 text-purple-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-700 dark:text-gray-100 leading-relaxed">
-                        {item}
-                      </span>
-                    </motion.li>
-                  ))}
-                </ul>
-              </motion.div>
+                  <ul className="space-y-3">
+                    {exp.description.map((item, idx) => (
+                      <motion.li
+                        key={idx}
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ delay: idx * 0.1 }}
+                        viewport={{ once: true }}
+                        className="flex items-start space-x-3"
+                      >
+                        <FaBriefcase className="w-5 h-5 text-purple-400 mt-0.5 flex-shrink-0" />
+                        <span className="text-gray-600 dark:text-gray-400 font-medium">
+                          {item}
+                        </span>
+                      </motion.li>
+                    ))}
+                  </ul>
+                </motion.div>
+              </Tilt>
             </motion.div>
           ))}
         </motion.div>

@@ -74,7 +74,7 @@ const Header = ({
         <div className="flex items-center space-x-4">
           <motion.button
             onClick={toggleDarkMode}
-            className="p-2 rounded-full bg-white dark:bg-white/10 dark:hover:neon-glow hover:shadow-md transition-all duration-300"
+            className="text-xl md:text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 dark:from-purple-400 dark:to-blue-400 bg-clip-text text-transparent hover:scale-105 transition-transform duration-300"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -120,8 +120,8 @@ const Header = ({
                 }}
                 className={`text-lg font-medium py-2 transition-colors duration-300 ${
                   activeSection === item.id
-                    ? "text-purple-400 neon-text"
-                    : "text-gray-900 dark:text-gray-100 hover:text-purple-400 hover:neon-text"
+                      ? "text-purple-600 dark:text-purple-400"
+                      : "text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400"
                 }`}
                 whileHover={{ scale: 1.02 }}
               >

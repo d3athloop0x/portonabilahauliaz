@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import TypedText from "./TypedText";
 import { FaWhatsapp, FaInstagram, FaGithub, FaLinkedin } from "react-icons/fa";
 import AnimatedBackground from "./AnimatedBackground";
+import InteractiveBackground from "./InteractiveBackground";
 
 const Home = () => {
   const containerVariants = {
@@ -31,14 +32,8 @@ const Home = () => {
       className="min-h-screen flex items-center justify-center py-20 scroll-mt-20 relative overflow-hidden"
     >
       <AnimatedBackground />
-      {/* Background Effects */}
-      <div className="absolute inset-0">
-        <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-float"></div>
-        <div
-          className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-float"
-          style={{ animationDelay: "2s" }}
-        ></div>
-      </div>
+      {/* Interactive Background Effects */}
+      <InteractiveBackground />
 
       <div className="max-w-6xl mx-auto px-6 lg:px-8 relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
@@ -132,7 +127,7 @@ const Home = () => {
                 <motion.a
                   key={index}
                   href={href}
-                  className={`w-12 h-12 glass rounded-full flex items-center justify-center text-purple-600 dark:text-purple-300 transition-all duration-300 ${color} hover:scale-110 hover:neon-glow`}
+                  className={`w-12 h-12 glass rounded-full flex items-center justify-center text-purple-600 transition-all duration-300 ${color} hover:scale-110 hover:neon-glow`}
                   whileHover={{ y: -5 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -169,7 +164,7 @@ const Home = () => {
               <div className="glass p-8 rounded-3xl">
                 <div className="relative overflow-hidden rounded-2xl">
                   <img
-                    src="/pp.jpg"
+                    src="bb.jpeg"
                     alt="Nabilah Aulia Zahra"
                     className="w-80 h-80 md:w-96 md:h-96 object-cover rounded-2xl transition-transform duration-500 hover:scale-110"
                   />
@@ -177,7 +172,7 @@ const Home = () => {
                 </div>
               </div>
               <div className="absolute -bottom-4 -right-4 w-full h-full glass rounded-3xl -z-10"></div>
-              <div className="absolute inset-0 rounded-3xl border border-purple-500/30 animate-pulse-glow"></div>
+              <div className="absolute inset-0 rounded-3xl border border-purple-500/20 dark:border-purple-500/30 animate-pulse-glow"></div>
             </div>
           </motion.div>
         </div>
